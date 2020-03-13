@@ -50,14 +50,26 @@ export class SampleComponent
       const wb: Xlsx.WorkBook = Xlsx.read(bstr, { type: 'binary' });
 
       /* grab first sheet */
-      const wsname: string = wb.SheetNames[0];
-      const ws: Xlsx.WorkSheet = wb.Sheets[wsname];
+      //const wsname: string = wb.SheetNames[0];
+      //const ws: Xlsx.WorkSheet = wb.Sheets[wsname];
 
-      /* save data */
-      data = Xlsx.utils.sheet_to_json(ws, { header: 1 });
-      console.log(data);
+      ///* save data */
+      //data = Xlsx.utils.sheet_to_json(ws, { header: 1 });
+      //console.log(data);
+
+      //For multiple sheets
+      for (var i = 0; i < wb.SheetNames.length; i++) {
+        const wsname: string = wb.SheetNames[i];
+        const ws: Xlsx.WorkSheet = wb.Sheets[wsname];
+
+        /* save data */
+        data = Xlsx.utils.sheet_to_json(ws, { header: 1 });
+        console.log(data);
+      }
     };
     reader.readAsBinaryString(files[0]);
    
   }
+
+
 }
